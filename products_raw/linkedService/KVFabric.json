@@ -1,0 +1,10 @@
+{
+	"name": "KVFabric",
+	"properties": {
+		"annotations": [],
+		"type": "AzureKeyVault",
+		"typeProperties": {
+			"baseUrl": "https://kv-gecasl-fabric.vault.azure.net/"
+		}
+	}
+}
