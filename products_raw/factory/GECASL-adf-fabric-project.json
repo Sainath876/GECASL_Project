@@ -1,0 +1,9 @@
+{
+	"name": "GECASL-adf-fabric-project",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "ec9dc0c9-3ab1-4bbb-b92c-d95aac30cd3d",
+		"tenantId": "035ddef6-2433-48b6-8526-70ca8181f76d"
+	}
+}
