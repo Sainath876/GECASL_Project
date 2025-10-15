@@ -64,6 +64,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('factoryName'), '/CosmosDbNoSqlContainer1')]",
+			"type": "Microsoft.DataFactory/factories/datasets",
+			"apiVersion": "2018-06-01",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "CosmosDbNoSql1",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "CosmosDbSqlApiCollection",
+				"schema": {},
+				"typeProperties": {
+					"collectionName": "productCatalog"
+				}
+			},
+			"dependsOn": [
+				"[concat(variables('factoryId'), '/linkedServices/CosmosDbNoSql1')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('factoryName'), '/Json1')]",
 			"type": "Microsoft.DataFactory/factories/datasets",
 			"apiVersion": "2018-06-01",
@@ -119,33 +139,13 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('factoryName'), '/CosmosDbNoSqlContainer1')]",
-			"type": "Microsoft.DataFactory/factories/datasets",
-			"apiVersion": "2018-06-01",
-			"properties": {
-				"linkedServiceName": {
-					"referenceName": "CosmosDbNoSql1",
-					"type": "LinkedServiceReference"
-				},
-				"annotations": [],
-				"type": "CosmosDbSqlApiCollection",
-				"schema": {},
-				"typeProperties": {
-					"collectionName": "productCatalog"
-				}
-			},
-			"dependsOn": [
-				"[concat(variables('factoryId'), '/linkedServices/CosmosDbNoSql1')]"
-			]
-		},
-		{
-			"name": "[concat(parameters('factoryName'), '/PL_GECASL_Products_JSON_Cosmos')]",
+			"name": "[concat(parameters('factoryName'), '/PL_GECASL_Products_GetData')]",
 			"type": "Microsoft.DataFactory/factories/pipelines",
 			"apiVersion": "2018-06-01",
 			"properties": {
 				"activities": [
 					{
-						"name": "Copy_Json_To_CosmosDB",
+						"name": "copy_products_json_cosmosDB",
 						"type": "Copy",
 						"dependsOn": [],
 						"policy": {
@@ -168,12 +168,6 @@
 						"typeProperties": {
 							"source": {
 								"type": "JsonSource",
-								"additionalColumns": [
-									{
-										"name": "source_file_name",
-										"value": "$$FILEPATH"
-									}
-								],
 								"storeSettings": {
 									"type": "AzureBlobStorageReadSettings",
 									"recursive": true,
@@ -185,7 +179,8 @@
 							},
 							"sink": {
 								"type": "CosmosDbSqlApiSink",
-								"writeBehavior": "insert"
+								"writeBehavior": "insert",
+								"disableMetricsCollection": false
 							},
 							"enableStaging": false,
 							"logSettings": {
