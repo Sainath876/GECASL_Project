@@ -1,0 +1,50 @@
+{
+	"name": "Json1",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureBlobFabric",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"fileName": "product-catalog.json",
+				"folderPath": "productCatalog-raw",
+				"container": "gecaslraw"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"product_id": {
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"price": {
+					"type": "number"
+				},
+				"details": {
+					"type": "object",
+					"properties": {
+						"category": {
+							"type": "string"
+						},
+						"tags": {
+							"type": "array",
+							"items": {
+								"type": "string"
+							}
+						},
+						"availability": {
+							"type": "string"
+						}
+					}
+				}
+			}
+		}
+	}
+}
