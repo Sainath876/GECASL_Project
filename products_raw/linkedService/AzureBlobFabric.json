@@ -1,0 +1,18 @@
+{
+	"name": "AzureBlobFabric",
+	"properties": {
+		"annotations": [],
+		"type": "AzureBlobStorage",
+		"typeProperties": {
+			"connectionString": {
+				"type": "AzureKeyVaultSecret",
+				"store": {
+					"referenceName": "KVFabric",
+					"type": "LinkedServiceReference"
+				},
+				"secretName": "gecasl-sa-key",
+				"secretVersion": "42a3192246c241319148c99f9c95a91b"
+			}
+		}
+	}
+}
